@@ -22,3 +22,6 @@ elixir/*.ez
 
 ## Elm ##
 elm/elm-stuff/
+
+## Building ##
+.atom-build.yml

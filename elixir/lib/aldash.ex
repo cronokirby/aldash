@@ -1,18 +1,13 @@
 defmodule Aldash do
-  @moduledoc """
-  Documentation for Aldash.
-  """
+  use Application
 
-  @doc """
-  Hello world.
 
-  ## Examples
+  def start(_type, _args) do
 
-      iex> Aldash.hello
-      :world
+    children = [
+      Plug.Adapters.Cowboy.child_spec(:http, Aldash.Router, [], port: 8080)
+    ]
 
-  """
-  def hello do
-    :world
+    Supervisor.start_link(children, strategy: :one_for_one)
   end
 end

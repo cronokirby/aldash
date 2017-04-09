@@ -9,8 +9,15 @@ import Update exposing (Msg, update)
 import View exposing (view)
 
 
-init : Model
-init = Model Stats.init
+init : (Model, Cmd Msg)
+init = (Model Stats.init, Cmd.none)
 
 main : Program Never Model Msg
-main = beginnerProgram { model = init, view = view, update = update }
+main = Html.program { init = init
+                    , view = view
+                    , update = update
+                    , subscriptions = subscriptions
+                    }
+
+subscriptions : Model -> Sub Msg
+subscriptions _ = Sub.none

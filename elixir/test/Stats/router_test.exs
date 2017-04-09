@@ -5,12 +5,17 @@ defmodule Aldash.Stats.RouterTest do
 
   @opts Router.init([])
 
+  defp test_resp(info) do
+    assert %{"uptime" => %{"d" => 0, "h" => 0, "m" => _},
+             "processes" => _} = info
+  end
+
   test "returns a valid response" do
     conn = conn(:get, "/stats", "")
            |> Router.call(@opts)
     assert conn.state == :sent
     assert conn.status == 200
-    assert match?(~s/{"processes":/ <> _, conn.resp_body)
+    conn.resp_body |> Poison.decode! |> test_resp
   end
 
   test "always returns the refresh" do
@@ -18,6 +23,6 @@ defmodule Aldash.Stats.RouterTest do
            |> Router.call(@opts)
     assert conn.state == :sent
     assert conn.status == 200
-    assert match?(~s/{"processes":/ <> _, conn.resp_body)
+    conn.resp_body |> Poison.decode! |> test_resp
   end
 end

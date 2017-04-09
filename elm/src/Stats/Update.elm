@@ -8,7 +8,7 @@ import Stats.Models exposing (Model)
 type alias Statinfo = { processes : Int }
 
 getStats : Http.Request Statinfo
-getStats = Http.get "localhost:8080/stats" decodeStats
+getStats = Http.get "http://localhost:8080/stats" decodeStats
 
 decodeStats : Decoder Statinfo
 decodeStats = Decode.map Statinfo (field "processes" int)
@@ -22,5 +22,5 @@ update msg model = case msg of
     (model, Http.send Change getStats)
   Change (Ok new) -> -- Swap out the old number
     ({ model | processes = new.processes }, Cmd.none)
-  Change (Err _) ->
+  Change (Err why) ->
     (model, Cmd.none)

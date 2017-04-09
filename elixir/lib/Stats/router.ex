@@ -1,17 +1,15 @@
 defmodule Aldash.Stats.Router do
   use Plug.Router
+  alias Aldash.Stats.StatInfo
 
   plug :match
   plug :dispatch
 
-  get "/" do
-    conn
-    |> put_resp_header("content-type", "text/plain")
-    |> send_resp(200, "hello from the stats!")
-  end
+  # Regardless of what gets asked, we just send the whole info
   match _ do
+    info = StatInfo.full_stats()
     conn
-    |> send_resp(404, "Woops")
-    |> halt
+    |> put_resp_header("content-type", "application/json")
+    |> send_resp(200, Poison.encode! info)
   end
 end

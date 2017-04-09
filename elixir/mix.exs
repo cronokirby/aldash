@@ -17,6 +17,7 @@ defmodule Aldash.Mixfile do
 
   defp deps do
   [{:cowboy, "~> 1.0.0"},
-   {:plug, "~> 1.0"}]
+   {:plug, "~> 1.0"},
+   {:alchemy, "~> 0.2.2", git: "https://github.com/cronokirby/alchemy.git"}]
   end
 end

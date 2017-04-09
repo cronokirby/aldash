@@ -10,12 +10,14 @@ defmodule Aldash.Stats.RouterTest do
            |> Router.call(@opts)
     assert conn.state == :sent
     assert conn.status == 200
+    assert match?(~s/{"processes":/ <> _, conn.resp_body)
   end
 
-  test "404s on unkown paths" do
-    conn = conn(:get, "/stats/foo", "")
+  test "always returns the refresh" do
+    conn = conn(:post, "/stats", "")
            |> Router.call(@opts)
     assert conn.state == :sent
-    assert conn.status == 404
+    assert conn.status == 200
+    assert match?(~s/{"processes":/ <> _, conn.resp_body)
   end
 end

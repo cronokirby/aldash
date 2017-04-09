@@ -1,15 +1,12 @@
 module Stats.Update exposing (..)
 
 import Http
-import Json.Decode as Decode exposing (..)
-import Stats.Models exposing (Model)
+import Stats.Models exposing (Model, Uptime, decoder)
 
 
 getStats : Http.Request Model
-getStats = Http.get "http://localhost:8080/stats" decodeStats
+getStats = Http.get "http://localhost:8080/stats" decoder
 
-decodeStats : Decoder Model
-decodeStats = Decode.map Model (field "processes" int)
 
 type Msg = Change (Result Http.Error Model)
          | Refresh

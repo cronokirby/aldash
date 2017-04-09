@@ -13,10 +13,10 @@ defmodule Aldash.Mixfile do
   def application do
   [applications: [:cowboy, :logger, :plug],
    mod: {Aldash, []}]
-end
+  end
 
   defp deps do
   [{:cowboy, "~> 1.0.0"},
    {:plug, "~> 1.0"}]
-end
+  end
 end

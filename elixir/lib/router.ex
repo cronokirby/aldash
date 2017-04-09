@@ -1,8 +1,11 @@
 defmodule Aldash.Router do
   use Plug.Router
+  alias Aldash.Stats
 
   plug :match
   plug :dispatch
+
+  forward "/stats", to: Stats.Router
 
   get "/" do
     conn

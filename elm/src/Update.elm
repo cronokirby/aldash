@@ -8,6 +8,6 @@ type Msg = Stats Stats.Msg
 
 update : Msg -> Model -> Model
 update msg model = case msg of
-  Stats msg ->
+  Stats msg -> -- Delegate and update the portion
     let stats = Stats.update msg model.stats
     in { model | stats = stats }

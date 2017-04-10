@@ -20,6 +20,15 @@ cell : (List (Attribute msg) -> List (Html msg) -> Html msg) ->
        String -> Html msg
 cell f x = f [] [Html.text x]
 
+memCell : String -> a -> Html Msg
+memCell mem a = cell td <| toString a ++ mem
+
+mbCell : a -> Html Msg
+mbCell = memCell " MB"
+
+kbCell : a -> Html Msg
+kbCell = memCell " KB"
+
 view : Model -> Html Msg
 view model =
   div []
@@ -31,8 +40,8 @@ view model =
            ]
         , tr []
            [ cell td <| formatUptime model.uptime
-           , cell td <| toString model.processes
-           , cell td <| toString model.totalMem
+           , mbCell model.processes
+           , mbCell model.totalMem
            ]
         , tr []
           [ cell th "IO input"
@@ -40,9 +49,9 @@ view model =
           , cell th "Code Memory"
           ]
         , tr []
-          [ cell td <| toString model.io.input
-          , cell td <| toString model.procMem
-          , cell td <| toString model.codeMem
+          [ mbCell model.io.input
+          , mbCell model.procMem
+          , mbCell model.codeMem
           ]
         , tr []
           [ cell th "IO output"
@@ -50,9 +59,9 @@ view model =
           , cell th "Atom memory"
           ]
         , tr []
-          [ cell td <| toString model.io.output
-          , cell td <| toString model.etsMem
-          , cell td <| toString model.atomMem
+          [ mbCell model.io.output
+          , kbCell model.etsMem
+          , kbCell model.atomMem
           ]
         ]
     , button [ onClick Refresh ] [ text "refresh" ]

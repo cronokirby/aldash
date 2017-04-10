@@ -25,13 +25,35 @@ view model =
   div []
     [ table []
         [ tr []
-           [ cell th "Processes"
-           , cell th "Uptime"
+           [ cell th "Uptime"
+           , cell th "Processes"
+           , cell th "Total Memory"
            ]
         , tr []
-           [ cell td <| toString model.processes
-           , cell td <| formatUptime model.uptime
+           [ cell td <| formatUptime model.uptime
+           , cell td <| toString model.processes
+           , cell td <| toString model.totalMem
            ]
+        , tr []
+          [ cell th "IO input"
+          , cell th "Process Memory"
+          , cell th "Code Memory"
+          ]
+        , tr []
+          [ cell td <| toString model.io.input
+          , cell td <| toString model.procMem
+          , cell td <| toString model.codeMem
+          ]
+        , tr []
+          [ cell th "IO output"
+          , cell th "ETS memory"
+          , cell th "Atom memory"
+          ]
+        , tr []
+          [ cell td <| toString model.io.output
+          , cell td <| toString model.etsMem
+          , cell td <| toString model.atomMem
+          ]
         ]
     , button [ onClick Refresh ] [ text "refresh" ]
     ]

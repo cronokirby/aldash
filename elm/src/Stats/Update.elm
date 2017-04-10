@@ -1,6 +1,7 @@
 module Stats.Update exposing (..)
 
 import Http
+import Debug exposing (..)
 import Stats.Models exposing (Model, Uptime, decoder)
 
 
@@ -16,6 +17,7 @@ update msg model = case msg of
   Refresh ->
     (model, Http.send Change getStats)
   Change (Ok new) -> -- Swap out the entire thing
-    (new, Cmd.none)
+    (Debug.log "json" new, Cmd.none)
   Change (Err why) ->
-    (model, Cmd.none)
+    let _ = log "error" why
+    in (model, Cmd.none)

@@ -17,8 +17,7 @@ defmodule Aldash.Stats.StatInfoTest do
   test "Full information should be given" do
     info = StatInfo.full_stats()
     Enum.each ["uptime", "processes", "totalmem",
-               "codemem", "IOin", "IOout",
-               "procmem", "ETSmem", "atmem"],
+               "codemem", "procmem", "ETSmem", "atmem"],
                fn k -> assert Map.has_key?(info, k) end
   end
 end

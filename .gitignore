@@ -26,3 +26,5 @@ elm/index.html
 
 ## Building ##
 .atom-build.yml
+
+/build

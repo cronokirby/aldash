@@ -10,4 +10,4 @@ main = T.writeFile "../build/index.css" $
 
 -- Main style sheet
 myStylesheet :: Css
-myStylesheet = body ? background red
+myStylesheet = body ? background lightslategray

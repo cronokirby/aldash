@@ -28,3 +28,5 @@ elm/index.html
 .atom-build.yml
 
 /build
+
+/.sass-cache

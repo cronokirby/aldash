@@ -1,6 +1,7 @@
 module Stats.View exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import List exposing (..)
 
@@ -31,7 +32,7 @@ kbCell = memCell " KB"
 
 view : Model -> Html Msg
 view model =
-  div []
+  div [class "stats-div"]
     [ table []
         [ tr []
            [ cell th "Uptime"

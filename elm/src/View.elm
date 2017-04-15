@@ -11,8 +11,8 @@ import Update exposing (Msg(..))
 navBar : Html Msg
 navBar =
   ul []
-   [ li [] [ text "Cache" ]
-   , li [] [ text "Statistics" ]
+   [ li [] [ a [] [ text "Cache" ] ]
+   , li [] [ a [] [ text "Statistics" ] ]
    ]
 
 view : Model -> Html Msg

@@ -1,12 +1,14 @@
 module Update exposing (..)
 
 import Stats.Update as Stats
-import Models exposing (Model)
+import Cache.Update as Cache
+import Models exposing (Model, View(..))
 
 
 type Msg
     = Stats Stats.Msg
-    | NoOp
+    | Cache Cache.Msg
+    | ChangeView View
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -14,5 +16,8 @@ update msg model =
         Stats msg -> -- Delegate and update the portion
           let (stats, cmd) = Stats.update msg model.stats
           in ({ model | stats = stats }, Cmd.map Stats cmd)
-        NoOp ->
-          (model, Cmd.none)
+        Cache msg -> -- Delegation again
+          let cache = Cache.update msg model.cache
+          in ({ model | cache = cache }, Cmd.none)
+        ChangeView view ->
+          ({ model | view = view }, Cmd.none)

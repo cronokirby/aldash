@@ -1,29 +1,21 @@
 module Cache.Models exposing (..)
 
-type Member
-    = Member
-    | Guild
-    | Channel
-    | PrivateChannel
-    | Role
-    | VoiceState
-    | Presence
-    | Emoji
+-- Guaranteed to be correct because of the dropdown selection
+type alias Member = String
 
-type Identifier
-    = Name
-    | ID
-
-type InputField
-    = None
-    | MemberField Member
-    | IDField Identifier
-    | Invalid
+-- Same shtick here
+type alias Identifier = String
 
 type alias Model =
-    { memberField : InputField
-    , idField : InputField
+    { memberField : Maybe Member
+    , idField : Maybe Identifier
+    , field : String
     }
 
 init : Model
-init = Model None None
+init = Model Nothing Nothing ""
+
+stringToMaybe : String -> Maybe String
+stringToMaybe str = case str of
+  "None" -> Nothing
+  str    -> Just str
